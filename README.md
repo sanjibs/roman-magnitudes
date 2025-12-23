@@ -14,7 +14,6 @@ This leads to 4 basic combinations or schemes. Optionally, for each of the schem
 - scheme C: *('tmass_j', 'tmass_ks')*
 - scheme D: *('phot_g_mean_mag')*
 
- #### Usage
 ```python
 import numpy as np
 import roman_magnitudes.models
@@ -43,8 +42,6 @@ other bands *(gaia_gbp, gaia_grp, gaia_g, tmass_j, tmass_h, tmass_ks, wise_w1, w
 Results are based on interpolation tables constructed from Phoenix synthetic spectra using the python synphot package.
 The magnitudes are **normalized to have a magnitude of 0.0 in *gaia_g* band**.
 
-
-#### Usage
 ```python
 df={}
 n=10
