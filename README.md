@@ -17,13 +17,14 @@ This leads to 4 basic combinations or schemes. Optionally, for each of the schem
 ```python
 import numpy as np
 import roman_magnitudes.models
+
 df={}
 df['phot_rp_mean_mag'] = np.array([8.0,9.0,10.0,12.0,14.0])
 df['phot_bp_mean_mag'] = df['phot_rp_mean_mag']+1.0
 df['feh'] = np.array([-0.5, 0.25, 0.0, 0.25, 0.5])
 df['ag'] = np.array([0.0, 0.1, 0.5, 1.0, 2.0])
 df['parallax'] = np.array([1.0, 1.0, 1.0, 1.0, 1.0])    
-rmodel1=RomanAppMagModel().load(df)
+rmodel1=roman_magnitudes.models.RomanAppMagModel().load(df)
 print('roman_f106:',rmodel1.get_magnitude('roman_f106'))
 
 df={}
@@ -43,33 +44,16 @@ Results are based on interpolation tables constructed from Phoenix synthetic spe
 The magnitudes are **normalized to have a magnitude of 0.0 in *gaia_g* band**.
 
 ```python
-df={}
-n=10
-df['phot_bp_mean_mag']=np.random.uniform(size=n)+14
-df['phot_rp_mean_mag']=np.random.uniform(size=n)+14
-df['feh']=np.random.uniform(size=n)-0.5
-df['ag']=np.random.uniform(size=n)
-df['parallax']=1+np.random.uniform(size=n)
-rmodel1=roman_magnitudes.models.RomanAppMagModel().load(df)
-print('roman_f106:',rmodel1.get_magnitude('roman_f106'))
-
-df={}
-n=10
-df['tmass_j']=np.random.uniform(size=n)+14
-df['tmass_ks']=np.random.uniform(size=n)+14
-df['parallax']=1+np.random.uniform(size=n)
-rmodel1.load(df)
-print('roman_grism:',rmodel1.get_magnitude('roman_grism'))
-print('roman_grism counts:',rmodel1.mag_to_counts(rmodel1.get_magnitude('roman_grism'),'roman_grism'))
-print('roman_grism counts:',rmodel1.mag_to_counts(26.61,'roman_f062'))
-
+import numpy as np
+import roman_magnitudes.models
 
 rmodel2=roman_magnitudes.models.RomanAbsMagModel()
 feh=np.array([-0.5, 0.25, 0.0, 0.25])
 teff=np.array([5000, 4500, 4250.0, 4000])
 logg=np.array([4.0, 3.5, 3.0, 0.0])
+ebv=np.array([0.0, 0.2, 0.3, 0.4])
 print(rmodel2.get_magnitude(feh, teff, logg, bandpass='gaia_g'))
 print(rmodel2.get_magnitude(feh, teff, logg, bandpass='gaia_gbp'))
-print(rmodel2.get_magnitude(feh, teff, logg, bandpass='tmass_ks'))
 print(rmodel2.get_magnitude(feh, teff, logg, bandpass='roman_f062'))
-
+print(rmodel2.get_magnitude(feh, teff, logg, bandpass='roman_f062',ebv=ebv))
+```
