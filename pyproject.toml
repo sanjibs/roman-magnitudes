@@ -1,0 +1,25 @@
+[project]
+name = "roman-magnitudes"
+description = "Roman apparent and absolute magnitudes"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "Sanjib Sharma"},
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "numpy >=1.25",
+    "scipy",
+    "ebfpy",
+]
+license-files = ["LICENSE"]
+dynamic = [
+    "version",
+]
+
+[tool.setuptools.package-data]
+data = ["*.csv", "*.ebf"]
