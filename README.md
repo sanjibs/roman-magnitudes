@@ -27,6 +27,25 @@ The magnitudes are **normalized to have a magnitude of 0.0 in *gaia_g* band**.
 import numpy as np
 import roman_magnitudes.models
 df={}
+df['phot_rp_mean_mag'] = np.array([8.0,9.0,10.0,12.0,14.0])
+df['phot_bp_mean_mag'] = df['phot_rp_mean_mag']+1.0
+df['feh'] = np.array([-0.5, 0.25, 0.0, 0.25, 0.5])
+df['ag'] = np.array([0.0, 0.1, 0.5, 1.0, 2.0])
+df['parallax'] = np.array([1.0, 1.0, 1.0, 1.0, 1.0])    
+rmodel1=RomanAppMagModel().load(df)
+print('roman_f106:',rmodel1.get_magnitude('roman_f106'))
+
+df={}
+df['tmass_ks'] = np.array([8.0,9.0,10.0,12.0,14.0])
+df['tmass_j'] = df['tmass_ks']+0.5
+df['parallax'] = np.array([1.0, 1.0, 1.0, 1.0, 1.0])
+rmodel1.load(df)
+print('roman_grism:',rmodel1.get_magnitude('roman_grism'))
+print('roman_grism counts:',rmodel1.mag_to_counts(rmodel1.get_magnitude('roman_grism'),'roman_grism'))
+print('roman_grism counts:',rmodel1.mag_to_counts(26.61,'roman_f062'))
+
+
+df={}
 n=10
 df['phot_bp_mean_mag']=np.random.uniform(size=n)+14
 df['phot_rp_mean_mag']=np.random.uniform(size=n)+14
