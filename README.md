@@ -14,15 +14,7 @@ This leads to 4 basic combinations or schemes. Optionally, for each of the schem
 - scheme C: *('tmass_j', 'tmass_ks')*
 - scheme D: *('phot_g_mean_mag')*
 
- 
-### Absolute Magnitudes (class RomanAbsMagModel)
-Absolute magntidues are presented as a function of stellar parameters *(feh, teff, logg)*. They are in AB magnitude system for Roman bands and Vega for 
-other bands *(gaia_gbp, gaia_grp, gaia_g, tmass_j, tmass_h, tmass_ks, wise_w1, wise_w2)*. 
-Results are based on interpolation tables constructed from Phoenix synthetic spectra using the python synphot package.
-The magnitudes are **normalized to have a magnitude of 0.0 in *gaia_g* band**.
-
-
-### Usagae
+ #### Usage
 ```python
 import numpy as np
 import roman_magnitudes.models
@@ -43,8 +35,17 @@ rmodel1.load(df)
 print('roman_grism:',rmodel1.get_magnitude('roman_grism'))
 print('roman_grism counts:',rmodel1.mag_to_counts(rmodel1.get_magnitude('roman_grism'),'roman_grism'))
 print('roman_grism counts:',rmodel1.mag_to_counts(26.61,'roman_f062'))
+```
+
+### Absolute Magnitudes (class RomanAbsMagModel)
+Absolute magntidues are presented as a function of stellar parameters *(feh, teff, logg)*. They are in AB magnitude system for Roman bands and Vega for 
+other bands *(gaia_gbp, gaia_grp, gaia_g, tmass_j, tmass_h, tmass_ks, wise_w1, wise_w2)*. 
+Results are based on interpolation tables constructed from Phoenix synthetic spectra using the python synphot package.
+The magnitudes are **normalized to have a magnitude of 0.0 in *gaia_g* band**.
 
 
+#### Usage
+```python
 df={}
 n=10
 df['phot_bp_mean_mag']=np.random.uniform(size=n)+14
