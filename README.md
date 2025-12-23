@@ -1,8 +1,10 @@
 # Computing Roman magnitudes in different photometric bands
 Two models are provided one computes the apparent magnitude while the other computes Absolute magnitude. 
 Output is available for following roman passbands 
-
 *['roman_f062', 'roman_f087', 'roman_f106', 'roman_f129', 'roman_f146', 'roman_f158', 'roman_f184', 'roman_f213', 'roman_prism', 'roman_grism', 'roman_prism_b8', 'roman_prism_r8', 'roman_grism_b8', 'roman_grism_r8']*
+
+See tech-report Roman-STScI–000825 for further details.
+
 
 ### Apparent Magnitudes (class RomanAppMagModel)
 Apparent magnitude is based on analytical formulas and requires photometry in Gaia or 2MASS bands/
