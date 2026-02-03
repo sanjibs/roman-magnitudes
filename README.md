@@ -43,7 +43,7 @@ print('roman_grism counts:',rmodel1.mag_to_counts(26.61,'roman_f062'))
 Absolute magntidues are presented as a function of stellar parameters *(feh, teff, logg)*. They are in AB magnitude system for Roman bands and Vega for 
 other bands *(gaia_gbp, gaia_grp, gaia_g, tmass_j, tmass_h, tmass_ks, wise_w1, wise_w2)*. 
 Results are based on interpolation tables constructed from Phoenix synthetic spectra using the python synphot package.
-The magnitudes are **normalized to have a AB magnitude of 0.0 in *gaia_g* band**.
+Internally, the magnitudes are **normalized to have a AB magnitude of 0.0 in *gaia_g* band**. Hence the user needs to supply absolute magnitude in *gaia_g* band (assumed to be Vega) to get the true absolute mags.  
 
 ```python
 import numpy as np
@@ -54,8 +54,11 @@ feh=np.array([-0.5, 0.25, 0.0, 0.25])
 teff=np.array([5000, 4500, 4250.0, 4000])
 logg=np.array([4.0, 3.5, 3.0, 0.0])
 ebv=np.array([0.0, 0.2, 0.3, 0.4])
+gaia_g=np.array([1.0, 2.0, 3.0, 4.0])
 print(rmodel2.get_magnitude(feh, teff, logg, bandpass='gaia_g'))
-print(rmodel2.get_magnitude(feh, teff, logg, bandpass='gaia_gbp'))
-print(rmodel2.get_magnitude(feh, teff, logg, bandpass='roman_f062'))
-print(rmodel2.get_magnitude(feh, teff, logg, bandpass='roman_f062',ebv=ebv))
+print(rmodel2.get_magnitude(feh, teff, logg, bandpass='gaia_g', gaia_g=gaia_g))
+print(rmodel2.get_magnitude(feh, teff, logg, bandpass='gaia_gbp', gaia_g=gaia_g))
+print(rmodel2.get_magnitude(feh, teff, logg, bandpass='roman_f062', gaia_g=gaia_g))
+print(rmodel2.get_magnitude(feh, teff, logg, bandpass='roman_f062',ebv=ebv, gaia_g=gaia_g))
+
 ```

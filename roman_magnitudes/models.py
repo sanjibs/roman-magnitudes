@@ -283,7 +283,7 @@ class RomanAbsMagModel:
             if delete:
                 del data[inkeys[i]]
                 
-    def get_magnitude(self, feh, teff, logg, ebv=0.0, bandpass='roman_f062'):
+    def get_magnitude(self, feh, teff, logg, ebv=0.0, bandpass='roman_f062', gaia_g=0.0):
         """
         Arguments
         ----------
@@ -295,10 +295,13 @@ class RomanAbsMagModel:
         ----------
         band: str 
         ebv: array(float), extinction default is 0.0
+        gaia_g: array(float), absolute mag in Gaia G band (Vega), default is 0.0
         """
         
         input_tuple = (feh, teff, logg)
-        temp=self.interpolated_photometry[bandpass](input_tuple)+self.aebv[bandpass]*ebv
+        # normalization in in gaia AB mag, so we convert the input gaia_g in Vega to AB mag
+        gaia_g=gaia_g+self.ab2vega['gaia_g']
+        temp=self.interpolated_photometry[bandpass](input_tuple)+self.aebv[bandpass]*ebv+gaia_g
         if bandpass in self.ab2vega:
             temp=temp-self.ab2vega[bandpass]
             
